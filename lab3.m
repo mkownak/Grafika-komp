@@ -115,6 +115,7 @@ imshow(new_image);
 %}
 
 %zad.5
+%{
 clear;
 og_image=imread("rzeczka2.png");
 og_image_double=double(og_image);
@@ -137,6 +138,50 @@ LUT=round(wyjscie * 255);
 
 new_image=LUT_zastosuj(og_image_double,LUT);
 new_image=uint8(new_image);
+
+figure;
+imshow(og_image);
+
+figure;
+imshow(new_image);
+%}
+
+%zad.6
+clear;
+og_image=imread("rzeczka2.png");
+og_image_double=double(og_image);
+
+LUT = zeros(1,256);
+wspKontrastu=60;
+
+function wyjscie = PrzytnijZakres(wejscie)
+  if wejscie <= 0
+    wyjscie = 0;
+  elseif wejscie >= 255
+    wyjscie = 255;
+  else
+    wyjscie = wejscie;
+  endif
+endfunction
+
+wspMn = power((255+wspKontrastu)/255,2);
+
+for i = 0:255 %przerob to na function aby bylo elastyczne
+  wyjscie = 127.5 + (i - 127.5) * wspMn
+  LUT(i+1) = PrzytnijZakres(wyjscie);
+end
+
+function wyjscie = LUT_zastosuj(wejscie, LUT)
+    wejscie(wejscie < 0) = 0;
+    wejscie(wejscie > 255) = 255;
+
+    zaokraglone_wejscie = round(wejscie);
+
+    wyjscie = LUT(zaokraglone_wejscie + 1);
+end
+
+new_image = LUT_zastosuj(og_image_double,LUT);
+new_image = uint8(new_image);
 
 figure;
 imshow(og_image);
