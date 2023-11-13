@@ -1,0 +1,13 @@
+1.na poczatku skryptu clear i clf
+2. funkcje robic w .f 
+
+1.dokumentacja polecenie doc :/
+-zeros reshape dozwolone
+
+instrukcja dozwolona czyli laby
+
+tablica LUT problemy
+gora - dol = skok
+
+x-10/p-l zakres od [0;1] = krok
+plot([0:255],LUT);
